@@ -73,21 +73,30 @@ mvn package -DskipTests
 ``
 docker build -t explorecali .
 ``
-##### Run Docker container
+###### Run Docker container with default property set in Dockerfile
 ``
-//Just run the Container
-docker run --name ec-app -p8080:8080 -d explorecali
-//Run a Container linking to another "MySql"
-docker run  --name ec-app -p 8080:8080  --link ec-mysql:mysql -d explorecali
+docker run --name ec-app -d explorecali
 ``
-##### enter Docker container
+##### Run Docker container with mysql profile set in Dockerfile
+``
+docker run    --name ec-app -p 8080:8080   --link ec-mysql:mysql -d explorecali
+``
+##### Run Docker container with docker profile set in Dockerfile and migration scripts on host
+``
+docker run --name ec-app -p 8080:8080 -v ~/db/migration:/var/migration -e server=ec-mysql -e port=3306 -e dbuser=cali_user -e dbpassword=cali_pass --link ec-mysql:mysql -d explorecali
+``
+#### Shared D: for Windows
+``
+  ...      -v "/d/Projects DevOps/Docker-Explore-California/db/migration:/var/migration"  ...
+``
+##### Enter Docker container
 ``
 docker exec -t -i ec-app /bin/bash
 ``
 ##### Remove Images & container (must stop it first)
 ``
-//it remosve containers
+//it removes containers
 docker rm explorecali --force
-//it remosve images
+//it removes images
 docker rmi explorecali --force
 ``
