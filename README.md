@@ -80,7 +80,10 @@ docker run --name ec-app -p8080:8080 -d explorecali
 ``
 docker exec -t -i ec-app /bin/bash
 ``
-##### Remove Images container (must stop it first)
+##### Remove Images & container (must stop it first)
 ``
+//it remosve containers
+docker rm explorecali --force
+//it remosve images
 docker rmi explorecali --force
 ``
