@@ -7,6 +7,7 @@ Install Docker For Mac/Windows/Linux
 Set JAVA_HOME
 Set M2_HOME
 Add M2_HOME/bin to the execution path
+mvn package -DskipTests
 #### Docker Commands
 ##### Start MySql Container (downloads image if not found)
 ``
@@ -74,7 +75,10 @@ docker build -t explorecali .
 ``
 ##### Run Docker container
 ``
+//Just run the Container
 docker run --name ec-app -p8080:8080 -d explorecali
+//Run a Container linking to another "MySql"
+docker run  --name ec-app -p 8080:8080  --link ec-mysql:mysql -d explorecali
 ``
 ##### enter Docker container
 ``
