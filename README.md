@@ -63,3 +63,20 @@ or
 ``
 java  -Dspring.profiles.active=mysql -jar target/explorecali-2.0.0-SNAPSHOT.jar
 ``
+#### Dockerize Explore California
+##### Build jar
+``
+mvn package -DskipTests
+``
+##### Build Docker image
+``
+docker build -t explorecali .
+``
+##### Run Docker container
+``
+docker run    --name ec-app -d explorecali
+``
+##### enter Docker container
+``
+docker exec -t -i ec-app /bin/bash
+``
