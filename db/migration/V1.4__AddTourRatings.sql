@@ -9,4 +9,5 @@
   (1, 10, 1, 'I hated it'),
   (1, 11, 1, 'We hated it'),
   (2, 100, 5, 'I really thought it could have been better'),
-  (7, 55, 5, 'I martini love it');
+  (7, 55, 5, 'I Osvaldo Martini love it'),
+  (6, 155, 5, 'I Claudia love it');
