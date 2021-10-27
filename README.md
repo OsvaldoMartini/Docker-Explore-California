@@ -74,9 +74,13 @@ docker build -t explorecali .
 ``
 ##### Run Docker container
 ``
-docker run    --name ec-app -d explorecali
+docker run --name ec-app -p8080:8080 -d explorecali
 ``
 ##### enter Docker container
 ``
 docker exec -t -i ec-app /bin/bash
+``
+##### Remove Images container (must stop it first)
+``
+docker rmi explorecali --force
 ``
