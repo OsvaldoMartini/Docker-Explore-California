@@ -3,8 +3,6 @@ package com.example.ec;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.web.server.ServerHttpSecurity;
-import org.springframework.security.web.server.SecurityWebFilterChain;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
@@ -33,15 +31,6 @@ public class ExplorecaliApplication {
                 new Contact("LinkedIn Learning","https://www.linkedin.com/learning", ""),
                 null, null, new ArrayList()));
     }
-
-//    @Bean
-//    public SecurityWebFilterChain securityWebFilterChain(
-//            ServerHttpSecurity http) {
-//        return http.authorizeExchange()
-//                .pathMatchers("/actuator/**").permitAll()
-//                .anyExchange().authenticated()
-//                .and().build();
-//    }
 
 	public static void main(String[] args) {
 		SpringApplication.run(ExplorecaliApplication.class, args);
