@@ -1,5 +1,8 @@
 # Extending, Securing and Dockerizing Spring Boot Microservices
-"Extending, Securing and Dockerizing Spring Boot Microservices"
+"Extending, Securing and Dockerizing Spring Boot Microservices" from LinkedIn Learning.
+by, Mary Ellen Bowman, @MEllenBowman
+
+
 
 Final Product requires External MySql Database.
 Install Docker For Mac/Windows/Linux
@@ -64,26 +67,34 @@ or
 ``
 java  -Dspring.profiles.active=mysql -jar target/explorecali-2.0.0-SNAPSHOT.jar
 ``
-#### Dockerize Explore California
-##### Build jar
+## ---------------- Maven Docker Plugin -------------------
+## Dockerize  with Docker-Maven-Plugin  *Spotfy*
+##### Build jar, image, set default profile
 ``
-mvn package -DskipTests
+mvn package -DskipTests docker:build 
 ``
-##### Build Docker image
+###### container with default property set in Dockerfile
 ``
-docker build -t explorecali .
+docker run --name ec-app-default -p 8080:8080  -d explorecali-default
 ``
-###### Run Docker container with default property set in Dockerfile
+##### Build jar, image, set mysql profile
 ``
-docker run --name ec-app -d explorecali
+mvn package -DskipTests docker:build -Dec-profile=mysql
 ``
-##### Run Docker container with mysql profile set in Dockerfile
+##### Run Docker container with mysql profile
 ``
-docker run    --name ec-app -p 8080:8080   --link ec-mysql:mysql -d explorecali
+docker run    --name ec-app-mysql -p 8181:8080  --link ec-mysql:mysql -d explorecali-mysql
+``
+##### Build jar, image, set docker profile
+``
+mvn package -DskipTests docker:build -Dec-profile=docker
 ``
 ##### Run Docker container with docker profile set in Dockerfile and migration scripts on host
 ``
-docker run --name ec-app -p 8080:8080 -v ~/db/migration:/var/migration -e server=ec-mysql -e port=3306 -e dbuser=cali_user -e dbpassword=cali_pass --link ec-mysql:mysql -d explorecali
+docker run --name ec-app-docker -p 8282:8080 --rm -v ~/db/migration:/var/migration -e server=ec-mysql -e port=3306 -e dbuser=cali_user -e dbpassword=cali_pass --link ec-mysql:mysql -d explorecali-docker
+``
+or
+docker run --name ec-app -p 8080:8080 --rm -v "${pwd}/db/migration:/var/migration" -e server=ec-mysql -e port=3306 -e dbuser=cali_user -e dbpassword=cali_pass --link ec-mysql:mysql -d explorecali
 ``
 #### Shared D: for Windows
 ``
@@ -93,10 +104,4 @@ docker run --name ec-app -p 8080:8080 -v ~/db/migration:/var/migration -e server
 ``
 docker exec -t -i ec-app /bin/bash
 ``
-##### Remove Images & container (must stop it first)
-``
-//it removes containers
-docker rm explorecali --force
-//it removes images
-docker rmi explorecali --force
-``
+#####
