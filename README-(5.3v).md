@@ -97,3 +97,9 @@ docker run --name ec-app -p 8080:8080 --rm -v ${pwd}/db/migration:/var/migration
 ``
 docker exec -t -i ec-app /bin/bash
 ``
+
+
+##### But if you tag your image as you build it, it will be easier to run:
+``
+docker build -t foo . && docker run -it foo
+``
